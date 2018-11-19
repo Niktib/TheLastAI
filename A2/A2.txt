@@ -1,0 +1,65 @@
+head(X, [X|Y]).
+tail(Y, [X|Y]).
+last(E,L) :- append(_,[E],L).
+front(L1,L2) :- append(L1,_,L2).
+at_least_three_elements([A,B,C|_]).
+memberOf(E,L) :- appendTo(_,[E|_],L).
+break(L,Front,Middle,End) :- append(Front, Middle, Temp), append(Temp,End,L).
+before(X,Y,L) :- break(L,_,[X|_],[Y|_]).
+
+//Length
+lengthOf([],0).
+lengthOf([X1],1).
+lengthOf([X1,X2],N) :- length([X2], M), N is M+1.
+lengthOf([Head|Tail],N) :- length(Tail,M), N is M+1.
+
+//append adds two lists together
+appendTo([],L,L).
+appendTo([H|L1],L2,[H|L]) :- appendTo(L1,L2,L).
+
+//appends terms representnig lists or something??
+appendT(Term1,Term2,Result).
+
+
+//List2Term
+list2term([E|[]], next(E, nil).
+list2term([E|List], next(E, Term)):- list2term(List, Term).
+
+
+memberOfTree(X, tree(X, Left, Right)).
+memberOfTree(X, tree(Root, Left, Right)) :- memberOfTree(X, Left).
+memberOfTree(X, tree(Root, Left, Right)) :- memberOfTree(X, Right).
+
+treeToList(X,List) :- binaryTree(X), convert(X,List).
+
+/* The helping predicate convert(X,List) is true if X is a given non-empty tree, 
+   and List is a representation of this tree as an ordered list. */
+
+convert( tree(Element,void,void), List) :- List=[Element].    /* Leaf in a tree */
+
+
+/* Write the recursive rule */
+
+convert( tree(Root,Left,Right), List) :- 
+
+
+
+//Intersection finds all the elements in both L1, L2 
+intersection([],L,[]).
+intersection([E|L1],L2,[E|L]) :- member(E,L2), intersection(L1,L2,L).
+intersection([E|L1],L2,L) :- not member(E,L2), intersection(L1,L2,L).
+
+//Replace first replaces the first occurence of X in the list L1 by Y
+replaceFirst(X, Y, [], []).
+replaceFirst(X, Y, [X | L], [Y | L]).
+replaceFirst(X, Y, [Z | L1], [Z | L2] :- not X = Z, replaceFirst(X,Y,L1,L2).
+
+//Replace all replaces all
+replaceAll(X, Y, [], []).
+replaceAll(X, Y, [X|L1], [Y|L2]) :- replaceAll(X, Y, L1, L2).
+replaceAll(X, Y, [Z|L1], [Z|L2]) :- not X = Z, replaceAll(X,Y,L1,L2).
+
+//Checks if the item is greater then 6
+sift([],[]).
+sift([X|T],[X|Result]) :- X > 6, sift(T,Result).
+sift([H|T],Result) :- sift(T,Result).

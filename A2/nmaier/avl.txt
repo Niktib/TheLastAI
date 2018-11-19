@@ -1,0 +1,53 @@
+/* 	
+	Nikolas Maier	500 461 900
+	Daniel Lodge 	500 727 539
+*/
+
+----------------------------------------------------------------
+
+TREE:
+         a
+       /   \
+      b      c
+     / \     /\
+            
+
+QUERY FOR ABOVE TREE:
+?- avl(tree(a, tree(b, void, void), tree(c, void, void))).
+Yes (0.00s cpu)
+
+TREE :
+
+             a
+          /     \
+         b        h
+        / \       /\
+       c   g        i
+      / \  /\       / \
+     d                 j
+    / \               / \
+   e                     k
+  / \                   / \  
+
+QUERY FOR ABOVE TREE
+?- avl(tree(a, tree(b, tree(c, tree(d, tree(e, void, void), void), void), tree(g, void, void)), tree(h, void, tree(i, void, tree(j, void, tree(k, void, void)))))).
+No (0.00s cpu)
+
+TREE :
+
+         a
+       /   \
+      b      e
+     / \     /\
+    c   
+   / \
+  d   
+ / \
+
+
+QUERY FOR ABOVE TREE:
+?- avl(tree(a, tree(b, tree(c, tree(d, void, void), void), void), tree(e, void, void))).
+No (0.00s cpu)
+
+
+

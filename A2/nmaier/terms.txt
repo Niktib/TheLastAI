@@ -1,0 +1,56 @@
+/*
+Nikolas Maier 	500 461 990
+Daniel Lodge 	500 727 538
+*/
+%appendT
+?- appendT(next(a, nil), next(b, nil), X).
+X = next(a, next(b, nil))
+Yes (0.00s cpu)
+?- appendT(next(a, next(b, nil)), next(1, next(2, nil)), X).
+X = next(a, next(b, next(1, next(2, nil))))
+Yes (0.00s cpu)
+?- appendT(Init, next(1, next(2, nil)), next(a, next(b, next(1, next(2, nil))))).
+Init = next(a, next(b, nil))
+Yes (0.00s cpu, solution 1, maybe more)
+?- appendT(next(a, next(b, nil)), Final, next(a, next(b, next(1, next(2, nil))))).
+Final = next(1, next(2, nil))
+Yes (0.00s cpu)
+
+%list2term
+?- list2term([[a], [b, [c]], d], X).
+X = next(next(a, nil), next(next(b, next(next(c, nil), nil)), next(d, nil)))
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term([a, b, c], X).
+X = next(a, next(b, next(c, nil)))
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term([[a, [b, [c]]], d], X).
+X = next(next(a, next(next(b, next(next(c, nil), nil)), nil)), next(d, nil))
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term([[a, b]], X).
+X = next(next(a, next(b, nil)), nil)
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term([[a, b], [[a, b]], c, d], X).
+X = next(next(a, next(b, nil)), next(next(next(a, next(b, nil)), nil), next(c, next(d, nil))))
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term(X, next(a, next(b, nil))).
+X = [a, b]
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term(X, next(a, next(next(b, nil), nil))).
+X = [a, [b]]
+Yes (0.00s cpu, solution 1, maybe more)
+
+%list2term
+?- list2term([[a, b]], X), flat(X, Y).
+X = next(next(a, next(b, nil)), nil)
+Y = next(a, next(b, nil))
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term([[[a], z], [[b, [c]], [d]]], Term), flat(Term, FlatTerm).
+Term = next(next(next(a, nil), next(z, nil)), next(next(next(b, next(next(c, nil), nil)), next(next(d, nil), nil)), nil))
+FlatTerm = next(a, next(z, next(b, next(c, next(d, nil)))))
+Yes (0.00s cpu, solution 1, maybe more)
+?- list2term([[k], [[l]], [m, n]], Term), flat(Term, FlatTerm).
+Term = next(next(k, nil), next(next(next(l, nil), nil), next(next(m, next(n, nil)), nil)))
+FlatTerm = next(k, next(l, next(m, next(n, nil))))
+Yes (0.00s cpu, solution 1, maybe more)
+
+

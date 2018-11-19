@@ -1,0 +1,8 @@
+/*  NIKOLAS MAIER 500461990
+DANIEL LODGE 500727538 */
+
+We couldn't get Schedule to work quite right.
+
+we created a term to hold the Day of the exam, and a list to hold the class information.
+
+We could generate exam times, but not correctly

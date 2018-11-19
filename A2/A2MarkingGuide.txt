@@ -1,0 +1,107 @@
+CPS721, Fall 2018:   Assignment 2 Marking Guide
+TA: Jae Duk Seo  jae.duk.seo@ryerson.ca
+-----------------------------------------
+
+====================== Error Terms ======================
+Generic errors
+--------------
+G1	-1	       Syntax error: upper/lower case; inappropriate comparison operator
+G2	-4	       User-defined or built-in predicate ("member","length","max" etc.) used but not implemented; applied once per question per predicate
+G3	-ALL       Dishonesty (e.g., providing a manually edited Eclipse session); applied per question
+G4	-4	       Usage of ";" or "!" or "->".
+G5	-HALF*	Predicate used as a term or vice versa; applied per rule.
+* Rounded down
+====================== Error Terms ======================
+
+====================== Question 1 ======================
+Q1 (24 points)
+--------------
+
+Work unit		Weight		Error code
+
+Each pair of lists	3 pt		        E1.X.1*
+	Answer		1		        E1.X.2*
+	Proof		2		        E1.X.3*
+
+"Answer" consists of an assertion as to whether the lists unify and correct variable instantiations if they do.
+
+* Assuming the pairs of lists are enumerated (1,...,8), X is the number corresponding to the pair which contains the error.
+
+Very common problem: 'guessing' values and then transforming lists. This is wrong! You should transform given lists to have the same structure,
+so that they become strings which are either clearly identical (and only then match values) or clearly distinct.
+
+Proof is considered incomplete if you make assumptions about variable values that lead to less general answers than are achievable in principle.
+====================== Question 1 ======================
+
+====================== Question 2 ======================
+Q2 (20 points)
+--------------
+
+Work unit		Weight		Error code
+
+"everyOther"		7 pt  	E2.1.1
+	base case #1	1		       E2.1.2 - Base Case when both elements are []
+	base case #2	1		       E2.1.3 - Base Case when each input contains same element
+	recursion	5		       E2.1.4 - Recusion Case to find every other element in the first array
+
+"removeDups"		7 pt	        E2.2.1
+        base case	       1		E2.2.2 - Base Case when both list contains the same element
+	recursion #1	       3             E2.2.3 - Recusion Case to remove Duplicates
+	recursion #2	       3		E2.2.4 - Recusion Case to remove Duplicates from same element of list
+
+"sameFirstLast"		6 pt	        E2.3.1
+	base case	       2		 E2.3.2 - Base Case when first and last element is the same
+	recursion	       4		 E2.3.3 - Recursion case to identify if the first element is the same as the last
+        using append instead of recurisve rule is fine.
+====================== Question 2 ======================
+
+====================== Question 3 ======================
+Q3 (34 points)
+--------------
+
+Work unit		Weight		Error code
+
+
+"appendT"            11 pt
+	base case #1    2                 E3.1.1 - Base Case when both arrays are nil 
+	base case #2    2		        E3.1.2 - Base Case when first element is nil
+	base case #3    2		        E3.1.3 - Base Case when second element is nil
+	recursion	   5	               E3.1.4 - Recusion case to appent list
+
+"list2term"            12 pt
+	base case #1	  2		        E3.2.1 - Base case when given list is a nil 
+	base case #2	  2		        E3.2.2 - Base case when given list have one element
+	recursion #1	  4		        E3.2.3 - Recusion Case where no nested list exist
+	recursion #2	  4		        E3.2.4 - Recursion Case to convert every list to terms 
+
+"flat"                     11 pt
+	base case #1	    3		        E3.3.1 - Base Case when nil is given
+	base case #2	    3		        E3.3.2 - Base Case when one element is given
+	recursion	    5	               E3.3.3 - Recursion Case to flat an array
+
+====================== Question 3 ======================
+
+====================== Question 4 ======================
+Q4 (22 points)
+--------------
+
+Work unit		Weight		Error code
+
+"avl"			22 pt		E4.1.1
+	base case	   1		       E4.1.2 - Base Case when one leaf from a tree
+	avl(L)		   2		       E4.1.3 - Base Case when right tree is nil
+	avl(R)		   2		       E4.1.4 - Base Case when left tree is nil
+	height(L)	   2		       E4.1.5 - Calcualte the height of the left tree
+	height(R)	   2		       E4.1.6 - Calcualte the height of the right tree
+	height math	   2		        E4.1.7 - Mathamatical logic to calcualte the height is correct
+	height compar. 2		       E4.1.8 - Comparison of variable in calculating the height is correct
+    height predicate  2 pt	       E4.2.1 - There exist a height predicate and it works correctly
+	base case 	    1		       E4.2.2 - Base Case when height is nil
+	recurs.calls	    2		       E4.2.3 - There exist a recursive calls to calcualte the height of the tree 
+	find max	           2                E4.2.4 - There exist a predicate max (or something similiar) to find a max element between given elements
+	increment	    2		       E4.2.5 - Increase the height variable incremently
+====================== Question 4 ======================
+
+** NI - Not Implemented 
+
+

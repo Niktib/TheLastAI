@@ -1,0 +1,71 @@
+/* NIKOLAS MAIER 500461990
+MOHANNAD ALSAIDI 500521856
+DANIEL LODGE 500727538 */
+
+GRAPH FOR PATH OF BALL FROM ROBOT TO GOAL:
+
+     /----------------------------------->r1
+    /                                       \
+   /                                         \
+r3 ----------------------------------------> goal
+   \                                         /         
+    \                                       /          
+     \                                     /             
+      -----------> r2 -----------------> r1 
+
+EXPLANATION: WHY 3 DISTINCT SOLUTIONS FOR canScore(R):
+This graph shows that there are 3 distinct paths that the ball can take
+in order to reach the goal. Therefore, the expected result to the query
+canScore(R) should include 3 distinct solutions. One solution is r3 scoring on 
+the goal directly which is possible because pathClear(r3,goal) is in the knowledge
+base. The second solution is r3 passing the ball directly to r1, and then 
+r1 scoring on goal which is possible because pathClear(r3,r1) and pathClear(r1,goal)
+exist in the knowledge base. The third solution is r3 passing the ball to r2, and
+then r2 passing the ball to r1, with r1 then scoring on goal. This is possible 
+because pathClear(r3,r2), pathClear(r2,r1), and pathClear(r1,goal) are in the
+knowledge base.
+
+EXPLANATION: WHY 3 DISTINCT SOLUTIONS FOR canAssist(X,r1):
+r3 can assist r1, because pathClear(r3,r1). 
+r2 can assist r1, because pathClear(r2,r1).
+r3 can assist r1 in a second distinct way, because r3 can assist r2, which 
+can then assist r1, because pathClear(r3,r2) and pathClear(r2,r1).
+
+EXPLANATION FOR 'NOT PREDICATES' IN canAssist(X,Y):
+The 'not predicates' are required to ensure canAssist(X,Y) does not return
+goal as a solution. This is required because only robots can assist other robots.
+
+TEST QUERIES AND ANSWERS:
+?- canScore(R).
+R = r3
+Yes (0.00s cpu, solution 1, maybe more)
+R = r1
+Yes (0.00s cpu, solution 2, maybe more)
+R = r1
+Yes (0.00s cpu, solution 3, maybe more)
+No (0.00s cpu)
+?- canAssist(X, Y).
+X = r2
+Y = r1
+Yes (0.00s cpu, solution 1, maybe more)
+X = r3
+Y = r2
+Yes (0.02s cpu, solution 2, maybe more)
+X = r3
+Y = r1
+Yes (0.02s cpu, solution 3, maybe more)
+No (0.03s cpu)
+?- canAssist(X, r1).
+X = r2
+Yes (0.00s cpu, solution 1, maybe more)
+X = r3
+Yes (0.02s cpu, solution 2, maybe more)
+X = r3
+Yes (0.02s cpu, solution 3, maybe more)
+No (0.03s cpu)
+?- open(R).
+R = r1
+Yes (0.00s cpu, solution 1, maybe more)
+R = r3
+Yes (0.03s cpu, solution 2)
+

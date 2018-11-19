@@ -1,0 +1,33 @@
+/* NIKOLAS MAIER 500461990
+MOHANNAD ALSAIDI 500521856
+DANIEL LODGE 500727538 */
+?- dc(r1, r7).
+Yes (0.00s cpu, solution 1, maybe more)
+?- dc(r6, r10).
+No (0.00s cpu)
+?- related(r1, r2).
+Yes (0.00s cpu, solution 1, maybe more)
+?- related(r1, r7).
+No (0.00s cpu)
+?- partOf(r34, r4).
+Yes (0.00s cpu, solution 1, maybe more)
+?- partOf(r7, r8).
+Yes (0.00s cpu, solution 1, maybe more)
+?- partOf(r2, r4).
+No (0.00s cpu)
+?- touch(r6, r10).
+Yes (0.00s cpu)
+?- touch(r2, r24).
+No (0.00s cpu)
+?- tangentPartOf(r5, r6).
+No (0.00s cpu)
+?- tangentPartOf(r2, r4).
+No (0.00s cpu)
+?- inside(r7, r8).
+Yes (0.00s cpu, solution 1, maybe more)
+?- inside(r14, r1).
+Yes (0.00s cpu, solution 1, maybe more)
+?- overlaps(r1, r4).
+Yes (0.00s cpu, solution 1, maybe more)
+?- overlaps(r7, r4).
+No (0.00s cpu)

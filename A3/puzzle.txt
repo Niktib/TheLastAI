@@ -1,0 +1,18 @@
+/* NIKOLAS MAIER 500461990
+DANIEL LODGE 500727538 */
+
+/*Without Interleaving*/
+?- Start is cputime, print_solution(L), End is cputime, Time is End - Start.
+Start = 2735.64
+L = [3, 2, 4, 9, 0, 5, 1, 6]
+End = 2737.078
+Time = 1.4380000000001019
+Yes (1.44s cpu, solution 1, maybe more)
+
+/*With Interleaving*/
+?- Start is cputime, print_solution(L), End is cputime, Time is End - Start.
+Start = 2737.484
+L = [3, 2, 4, 9, 0, 5, 1, 6]
+End = 2737.484
+Time = 0.0
+Yes (0.00s cpu, solution 1, maybe more)

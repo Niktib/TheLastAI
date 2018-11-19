@@ -1,0 +1,119 @@
+/*  NIKOLAS MAIER 	500461990	
+DANIEL LODGE 	500727539 */
+
+%
+%				PART 1
+% A Series of Queries to text our database
+?- hasBook(indigo, levesque, X, Y).
+X = thinking_as_computation
+Y = 100
+Yes (0.00s cpu)
+?- hasBook(X, Y, thinking_as_computation, Z).
+X = amazon
+Y = levesque
+Z = 75
+Yes (0.00s cpu, solution 1, maybe more)
+?- hasBook(X, Y, computational_intelligence, Z), hasBook(X, W, artificial_intelligence_a_modern_approach, U).
+X = indigo
+Y = poole
+Z = 50
+W = russell
+U = 200
+Yes (0.00s cpu, solution 1, maybe more)
+?- shipping(X, Y, Z), not Y = toronto, Z < 10.
+X = amazon
+Y = newYork
+Z = 1
+Yes (0.00s cpu, solution 1, maybe more)
+?- shipping(X, Y, Z), shipping(A, B, C), X = A, not Y = B.
+X = indigo
+Y = toronto
+Z = 1
+A = indigo
+B = newYork
+C = 10
+Yes (0.00s cpu, solution 1, maybe more)
+?- shipping(amazon, X, Y).
+X = toronto
+Y = 3
+Yes (0.00s cpu, solution 1, maybe more)
+X = newYork
+Y = 1
+Yes (0.05s cpu, solution 2, maybe more)
+X = los_angeles
+Y = 10
+Yes (0.05s cpu, solution 3, maybe more)
+X = london
+Y = 0
+Yes (0.06s cpu, solution 4)
+
+%
+%				PART 2
+% A Series of Who and What statements
+
+1. ?- who([an, author, from, toronto], S).
+S = levesque
+Yes (0.00s cpu, solution 1, maybe more)
+
+2. ?- who([an, author, of, an, expensive, book, at, amazon], S).
+S = rowling
+Yes (0.00s cpu, solution 1, maybe more)
+
+3. ?- who([a, person, from, newYork], S).
+S = trenton
+Yes (0.00s cpu, solution 1, maybe more)
+
+4. what([a,bookstore,with,a,high,shipping,to,toronto],S). 
+S = book_city
+Yes (0.00s cpu, solution 1, maybe more)
+
+5. what([a,shipping,from,indigo,to,toronto],S).
+S = 1
+Yes (0.00s cpu, solution 1, maybe more)
+
+6. what([a,book,from,amazon],S).
+S = thinking_as_computation
+Yes (0.00s cpu, solution 1, maybe more)
+
+7. what([an,expensive,book,by,russell],S).
+S = more_AI
+Yes (0.00s cpu, solution 1, maybe more)
+
+8. what([a,bookstore,with,an,expensive,harry_potter],S). %%
+
+9. what([a,bookstore,with,a,harry_potter,for,110],S). %%
+
+10. what([a,book,by,russell,at,amazon,with,a,high,price],S).
+S = more_AI
+Yes (0.00s cpu, solution 1, maybe more)
+
+11. what([a,low,price,of,a,book,by,poole],S).
+S = 10
+Yes (0.00s cpu, solution 1, maybe more)
+
+12. what([a,price,of,computational_intelligence],S). 
+S = 10
+Yes (0.00s cpu, solution 1, maybe more)
+
+%
+%				PART 3
+% Self Generated Who and What statements
+
+?- who([an, author, with, an, expensive, book], S).
+S = rowling
+Yes (0.00s cpu, solution 1, maybe more)
+?- what([a, bookstore, with, an, expensive, book], S).
+S = amazon
+Yes (0.00s cpu, solution 1, maybe more)
+?- what([a, bookstore, with, an, expensive, book, by, rowling], S).
+S = amazon
+Yes (0.00s cpu, solution 1, maybe more)
+?- who([an, author, with, a, book, for, 110], S).
+S = rowling
+Yes (0.00s cpu, solution 1, maybe more)
+?- what([a, bookstore, with, a, moderate, shipping], S).
+S = amazon
+Yes (0.00s cpu, solution 1, maybe more)
+?- what([a, moderate, book], S).
+S = thinking_as_computation
+Yes (0.00s cpu, solution 1, maybe more)

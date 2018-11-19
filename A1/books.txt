@@ -1,0 +1,89 @@
+/* NIKOLAS MAIER 500461990
+MOHANNAD ALSAIDI 500521856
+DANIEL LODGE 500727538 */
+?- hasBook(indigo, levesque, X, Y).
+X = thinking_as_computation
+Y = 100
+Yes (0.00s cpu)
+?- hasBook(X, Y, thinking_as_computation, Z).
+X = amazon
+Y = levesque
+Z = 75
+Yes (0.00s cpu, solution 1, maybe more)
+?- hasBook(X, Y, computational_intelligence, Z), hasBook(X, W, artificial_intelligence_a_modern_approach, U).
+X = indigo
+Y = poole
+Z = 50
+W = russell
+U = 90
+Yes (0.00s cpu, solution 1, maybe more)
+?- shipping(X, Y, Z), not Y = toronto, Z < 10.
+X = amazon
+Y = new_york
+Z = 5
+Yes (0.00s cpu, solution 1, maybe more)
+?- shipping(X, Y, Z), shipping(A, B, C), X = A, not Y = B.
+X = indigo
+Y = toronto
+Z = 5
+A = indigo
+B = new_york
+C = 10
+Yes (0.00s cpu, solution 1, maybe more)
+?- shipping(amazon, X, Y).
+X = toronto
+Y = 10
+Yes (0.00s cpu, solution 1, maybe more)
+X = new_york
+Y = 5
+Yes (0.00s cpu, solution 2, maybe more)
+X = los_angeles
+Y = 10
+Yes (0.03s cpu, solution 3, maybe more)
+X = london
+Y = 30
+Yes (0.03s cpu, solution 4)
+?- hasBook(W, X, Y, Z), hasBook(W, X, A, B), not Y = A, Z > 100, B > 100.
+W = amazon
+X = rowling
+Y = harry_potter
+Z = 300
+A = atlas_shrugged
+B = 200
+Yes (0.00s cpu, solution 1, maybe more)
+?- lives(A, B), hasBook(C, A, D, E), shipping(C, G, H), hasBook(F, A, I, J), shipping(F, K, L), not B = los_angeles, not D = I, E + H < 150, J + L < 150.
+A = levesque
+B = new_york
+C = amazon
+D = thinking_as_computation
+E = 75
+G = toronto
+H = 10
+F = amazon
+I = common_sense_the_turing_test
+J = 30
+K = toronto
+L = 10
+Yes (0.00s cpu, solution 1, maybe more)
+?- hasBook(A, B, C, D), not (hasBook(E, B, F, G), hasBook(H, B, I, J), not F = I).
+A = amazon
+B = tolkien
+C = lotr
+D = 10
+E = E
+F = F
+G = G
+H = H
+I = I
+J = J
+Yes (0.00s cpu, solution 1, maybe more)
+?- hasBook(A, B, harry_potter, C), shipping(A, toronto, D), not (hasBook(A, B, harry_potter, C), shipping(A, toronto, D), hasBook(E, F, harry_potter, G), shipping(E, toronto, H), not A = E, C + D > G + H).
+A = book_city
+B = rowling
+C = 1
+D = 2
+E = E
+F = F
+G = G
+H = H
+Yes (0.00s cpu)

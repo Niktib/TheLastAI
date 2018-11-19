@@ -1,0 +1,12 @@
+who([an,author,from,toronto],S).
+who([an,author,of,an,expensive,book,at,amazon],S).
+who([a,person,from,newYork],S).
+what([a,bookstore,with,a,high,shipping,to,toronto],S). %%
+what([a,shipping,from,indigo,to,toronto],S). %%
+what([a,book,from,amazon],S).
+what([an,expensive,book,by,russell],S).
+what([a,bookstore,with,an,expensive,harry_potter],S). %%
+what([a,bookstore,with,a,harry_potter,for,110],S). %%
+what([a,book,by,russell,at,amazon,with,a,high,price],S). %%
+what([a,low,price,of,a,book,by,poole],S). %%
+what([a,price,of,computational_intelligence],S). 

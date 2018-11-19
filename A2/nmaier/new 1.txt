@@ -1,0 +1,29 @@
+solve([S,A,Y,M,T,L]) :-
+	dig(S), dig(A), dig(Y), dig(M), dig(T), dig(L),
+	S > 0, M > 0, N > 0, A > 0,
+	
+	
+	E is (Y*2) mod 10, C1 is (Y*2) // 10,
+	M is (A*Y+C1) mod 10, C10 is (A*Y+C1) // 10,
+	A is (S*Y+C10) mod 10, C100 is (S*Y+C10) // 10,
+	N is C100,
+	
+	E is (M*Y) mod 10, D1 is (M*Y) //10,
+	N is (M*A+D1) mod 10, D10 is (M*A+D1) //10,
+	M is (M*S+D10) mod 10, D100 is (M*S+D10) //10,
+	A is D100,
+	
+	L is (E+M) mod 10, F1 is (E+M) //10,
+	Y is (N+A+F1) mod 10, F10 is (N+A+F1) //10,
+	T is (N+M+F10) mod 10, F100 is (N+M+F10) //10,
+	S is (A + F100) mod 10, A + F100 < 10,
+	all_diff([S,A,Y,M,T,L]).
+	
+all_diff([]).
+all_diff([N|L]) :- not member(N,L), all_diff(L).
+
+member(N,[N|L]).
+member(N,[M|L]) :- member(N, L).
+
+dig(0). dig(1). dig(2). dig(3). dig(4).
+dig(5). dig(6). dig(7). dig(8). dig(9).

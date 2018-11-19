@@ -1,0 +1,72 @@
+/*
+Nikolas Maier 	500 461 990
+Daniel Lodge 	500 727 538
+*/
+[P] and [[desk,chair|[lamp|[]]]|Q]
+Yes.
+Steps:
+[[desk,chair|[lamp]]|Q]
+[[desk,chair,lamp]|Q]
+P = [desk,chair,lamp]
+Q = []
+LHS = RHS
+
+[eng|[Q|[R|S]]] and [R|[Q|AI721]]
+Yes
+[eng|[Q, R|S]] = [R, Q|AI721]
+[eng, Q, R|S] = [R, Q|AI721]
+R = eng
+[eng, Q, eng|S] = [eng, Q|AI721]
+AI721 = [eng|S]
+[eng, Q, eng|S] = [eng, Q|[eng|S]]
+[eng, Q, eng|S] = [eng, Q, eng|S]
+LHS = RHS
+
+[[R|S],[R]|S] and [[P|Q],[Q],x,y] 
+Yes
+S = [x,y]
+[[R,x,y],[R],x,y] = [[P|Q],[Q],x,y] 
+Q = [x,y]
+[[R,x,y],[R],x,y] = [[P,x,y],[[x,y]],x,y] 
+R = [x,y]
+P = [x,y]
+[[[x,y],x,y],[[x,y]],x,y] = [[[x,y],x,y],[[x,y]],x,y] 
+LHS = RHS
+
+[Var|[[d],d]] and [const,X|X]
+Yes
+[Var, [d], d] = [const,X|X]
+Var = const
+X = [d]
+[const, [d],d] = [const, [d]|[d]]
+[const, [d],d] = [const, [d],d]
+LHS = RHS
+
+[P,Q,[a,Q]] and [a,b,[R|[R]]]
+Doesn't work.
+[P,Q,[a,Q]] and [a,b,[R,R]]
+In order for it to work here, R = a and R = Q, and Q = b.
+LHS != RHS
+
+[Z,d|Z] and [[]|[d,[]]]
+Doesn't work.
+Lists cannot start with an [], and that is the only thing Z could equal here
+LHS != RHS
+
+[j,[k,l,m],l,m] and [j,[k,|LIST],LIST]
+Doesn't work.
+In order to match the part [k,l,m] then LIST = [l,m] but there is a difference between the ending of [j,[...],l,m] and [j,[...],[l,m]]
+LHS != RHS
+
+[ryerson,P,Q|R] and [Q|[[cs,Q]|[ryerson|P]]]
+Yes
+[ryerson,P,Q|R] = [Q|[[cs,Q],ryerson|P]]
+[ryerson,P,Q|R] = [Q,[cs,Q],ryerson|P]
+Q = ryerson
+[ryerson,P,ryerson|R] = [ryerson,[cs,ryerson],ryerson|P]
+P =[cs,ryerson]
+[ryerson,[cs,ryerson],ryerson|R] = [ryerson,[cs,ryerson],ryerson|[cs,ryerson]]
+R = [cs,ryerson]
+[ryerson,[cs,ryerson],ryerson|[cs,ryerson]] = [ryerson,[cs,ryerson],ryerson|[cs,ryerson]]
+[ryerson,[cs,ryerson],ryerson,cs,ryerson] = [ryerson,[cs,ryerson],ryerson,cs,ryerson]
+LHS = RHS
