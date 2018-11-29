@@ -123,15 +123,18 @@ with negation of a predicate, e.g., with negation of equality. This can help
 to make them a bit more efficient.
 */
 % write your successor state rules here: you have to write brief comments %
-in(O,C,[A|S]) :- not(A=fetch(O,C)).
+in(O,C,[A|S]) :- not(A=fetch(O,C)),in(O
 
-holding(O,[fetch(O,C)|S])
+holding(O,[fetch(O,C)|S]).
 holding(O,[A|S]) :- holding(S).
 
 
 holding(O,[A|S]) :- not(A=addSoftener(O,W)), not(A=addSoap(O,W)), not(A=putAway(O,C)).
 
 hasSoap(W,[addSoap(P,W)|S]).
+
+hasSoftener(W,[addSoftener(T,W)|S]).
+hasSoftener(W,[A|S]) :- not(A = washClothes(C,W)), hasSoftener(W,S), 
 
 
 
