@@ -65,6 +65,44 @@ mentions these variables.
 */
 % write your precondition rules here: you have to provide brief comments %
 
+poss(fetch(O,C),S):-not(holding(X,S)), in(O,C,S).
+
+poss(putAway(O,C),S):- holding(O,S).
+
+%poss(addSoap(P,W),S) :- 
+poss(addSoftener(T,W),S) :- holding(T,S).
+
+%poss(removeLint(D),S)
+%poss(washClothes(C,W),S)
+%poss(dryClothes(C,D),S)
+%poss(fold(C),S)
+%poss(wear(C),S)
+%poss(removeLint(d),S)
+
+
+/*
+[eclipse 2]: poss(addSoftener(sft1, w1), []).
+
+No (0.00s cpu)
+
+[eclipse 3]: poss(addSoftener(sft1, w1), [fetch(sft1,cbd1)]).
+Yes (0.00s cpu, solution 1, maybe more) ? ;
+
+No (0.00s cpu)
+[eclipse 4]: poss(addSoftener(sft1, w1), [fetch(p1,cbd1)]).
+
+No (0.00s cpu)
+*/
+
+/*
+poss(go(X),S) :-
+loc(X),
+location(monkey,L,S),
+not(X=L),
+not(on_box(S)).
+*/
+
+
 container(dresser).
 container(X) :- washer(X).
 container(X) :- dryer(X).
@@ -85,6 +123,17 @@ with negation of a predicate, e.g., with negation of equality. This can help
 to make them a bit more efficient.
 */
 % write your successor state rules here: you have to write brief comments %
+in(O,C,[A|S]) :- not(A=fetch(O,C)).
+
+holding(O,[fetch(O,C)|S])
+holding(O,[A|S]) :- holding(S).
+
+
+holding(O,[A|S]) :- not(A=addSoftener(O,W)), not(A=addSoap(O,W)), not(A=putAway(O,C)).
+
+hasSoap(W,[addSoap(P,W)|S]).
+
+
 
 
 	/* ---------- Heuristics To Cut Search ------------- */
