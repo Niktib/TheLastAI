@@ -13,11 +13,32 @@
    your program. The number "2" (or "3") is the arity of your fluent.
 */
 
+        
+washer(w1).     dryer(d1).
+
+clothes(cl1).   clothes(cl2). 
+
+hamper(h1).     hamper(h2).
+
+soap(p1).       soap(p2).       
+
+cupboard(cbd1). cupboard(cbd2).
+
+softener(sft1). softener(sft2). 
+
+in(cl1,h1,[]).  in(cl2,h2,[]).
+
+in(p1,cbd1,[]). in(p2,cbd2,[]). 
+
+in(sft1,cbd1,[]). in(sft2,cbd2,[]).
+
+
 % We are looking for a list of actions represented by a variable Plan
 % such that executing actions in Plan leads from the initial state
 % to a reachable state where a goal condition is true.
 
-solve_problem(Bound,Plan)  :-  C0 is cputime,     % C0 is time when program starts %
+
+/*solve_problem(Bound,Plan)  :-  C0 is cputime,     % C0 is time when program starts %
           max_length(Plan,Bound),          % Bound is the maximal length of Plan   %
           reachable(S,Plan),
           goal_state(S),           % A situation S must be a solution of the problem %
@@ -27,7 +48,7 @@ solve_problem(Bound,Plan)  :-  C0 is cputime,     % C0 is time when program star
 max_length([],N) :- N >= 0.
 max_length([First | L],N1) :- N1 > 0, N is N1 - 1, max_length(L,N).
 
-reachable(S,[]) :- initial_state(S).
+reachable(S,[]) :- initial_state(S). */
 
 /* The following rule is for the simplest instances of your planning domain.
    Use it when you debug your precondition and other rules and
@@ -52,8 +73,9 @@ reachable(S2, [M | ListOfPastActions]) :- reachable(S1,ListOfPastActions),
 */
 /* The following 2 clauses are from the Problem Solving section, page 31. */
 
-legal_move([A|S], A, S) :- poss(A,S).
-initial_state([]).
+/*legal_move([A|S], A, S) :- poss(A,S).
+initial_state([]).*/
+
 
         	/* Precondition axioms */
 /* 
@@ -65,12 +87,10 @@ mentions these variables.
 */
 % write your precondition rules here: you have to provide brief comments %
 
-poss(fetch(O,C),S):-not(holding(X,S)), in(O,C,S).
-
+poss(fetch(O,C),S):- \+(holding(X,S)), in(O,C,S).
 poss(putAway(O,C),S):- holding(O,S).
-
-%poss(addSoap(P,W),S) :- 
-poss(addSoftener(T,W),S) :- holding(T,S).
+poss(addSoap(P,W),S) :- holding(soap(P),S), \+(hasSoap(washer(W),S)).
+poss(addSoftener(T,W),S) :- holding(softener(T),S).
 
 %poss(removeLint(D),S)
 %poss(washClothes(C,W),S)
@@ -80,34 +100,12 @@ poss(addSoftener(T,W),S) :- holding(T,S).
 %poss(removeLint(d),S)
 
 
-/*
-[eclipse 2]: poss(addSoftener(sft1, w1), []).
-
-No (0.00s cpu)
-
-[eclipse 3]: poss(addSoftener(sft1, w1), [fetch(sft1,cbd1)]).
-Yes (0.00s cpu, solution 1, maybe more) ? ;
-
-No (0.00s cpu)
-[eclipse 4]: poss(addSoftener(sft1, w1), [fetch(p1,cbd1)]).
-
-No (0.00s cpu)
-*/
-
-/*
-poss(go(X),S) :-
-loc(X),
-location(monkey,L,S),
-not(X=L),
-not(on_box(S)).
-*/
-
-
 container(dresser).
 container(X) :- washer(X).
 container(X) :- dryer(X).
 container(X) :- cupboard(X).
 container(X) :- hamper(X).
+
 
         	/* Successor state axioms */
 /* 
@@ -123,20 +121,17 @@ with negation of a predicate, e.g., with negation of equality. This can help
 to make them a bit more efficient.
 */
 % write your successor state rules here: you have to write brief comments %
-in(O,C,[A|S]) :- not(A=fetch(O,C)),in(O
+%in(O,C,[A|S]) :- not(A=fetch(O,C)),in(O
+holding(O,[A|S]) :- A = fetch(O,C), in(O,C,S).
+%holding(O,[A|S]) :- not(A=putAway(_,_)), 
+%holding(O,[A|S]) :- holding(S).
+%holding(O,[A|S]) :- not(A=addSoftener(O,W)), not(A=addSoap(O,W)), not(A=putAway(O,C)).
+%hasSoap(W,[addSoap(P,W)|S]).
 
-holding(O,[fetch(O,C)|S]).
-holding(O,[A|S]) :- holding(S).
+%putAway() :- 
 
-
-holding(O,[A|S]) :- not(A=addSoftener(O,W)), not(A=addSoap(O,W)), not(A=putAway(O,C)).
-
-hasSoap(W,[addSoap(P,W)|S]).
-
-hasSoftener(W,[addSoftener(T,W)|S]).
-hasSoftener(W,[A|S]) :- not(A = washClothes(C,W)), hasSoftener(W,S), 
-
-
+%hasSoftener(softener(W),[addSoftener(T,W)|S]).
+%hasSoftener(softener(W),[A|S]) :- not(A = washClothes(clothes(C),W)), %hasSoftener(W,S).
 
 
 	/* ---------- Heuristics To Cut Search ------------- */
