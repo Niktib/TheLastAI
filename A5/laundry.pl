@@ -1,3 +1,6 @@
+/*  NIKOLAS MAIER 	500461990	
+    DANIEL  LODGE 	500727539 */
+
   /* Iterative deepening situations and fluents based planner from CPS721 */
 		
 :- dynamic clean/2.
@@ -13,32 +16,13 @@
    your program. The number "2" (or "3") is the arity of your fluent.
 */
 
-        
-washer(w1).     dryer(d1).
-
-clothes(cl1).   clothes(cl2). 
-
-hamper(h1).     hamper(h2).
-
-soap(p1).       soap(p2).       
-
-cupboard(cbd1). cupboard(cbd2).
-
-softener(sft1). softener(sft2). 
-
-in(cl1,h1,[]).  in(cl2,h2,[]).
-
-in(p1,cbd1,[]). in(p2,cbd2,[]). 
-
-in(sft1,cbd1,[]). in(sft2,cbd2,[]).
-
 
 % We are looking for a list of actions represented by a variable Plan
 % such that executing actions in Plan leads from the initial state
 % to a reachable state where a goal condition is true.
 
 
-/*solve_problem(Bound,Plan)  :-  C0 is cputime,     % C0 is time when program starts %
+solve_problem(Bound,Plan)  :-  C0 is cputime,     % C0 is time when program starts %
           max_length(Plan,Bound),          % Bound is the maximal length of Plan   %
           reachable(S,Plan),
           goal_state(S),           % A situation S must be a solution of the problem %
@@ -48,7 +32,7 @@ in(sft1,cbd1,[]). in(sft2,cbd2,[]).
 max_length([],N) :- N >= 0.
 max_length([First | L],N1) :- N1 > 0, N is N1 - 1, max_length(L,N).
 
-reachable(S,[]) :- initial_state(S). */
+reachable(S,[]) :- initial_state(S). 
 
 /* The following rule is for the simplest instances of your planning domain.
    Use it when you debug your precondition and other rules and
@@ -73,8 +57,8 @@ reachable(S2, [M | ListOfPastActions]) :- reachable(S1,ListOfPastActions),
 */
 /* The following 2 clauses are from the Problem Solving section, page 31. */
 
-/*legal_move([A|S], A, S) :- poss(A,S).
-initial_state([]).*/
+legal_move([A|S], A, S) :- poss(A,S).
+initial_state([]).
 
 
         	/* Precondition axioms */
@@ -87,10 +71,36 @@ mentions these variables.
 */
 % write your precondition rules here: you have to provide brief comments %
 
-poss(fetch(O,C),S):- \+(holding(X,S)), in(O,C,S).
+/*if the robot isn't holding anything, and the object it is looking for is in the cupboard, then it is possible to fetch.*/
+poss(fetch(O,C),S):- not(holding(X,S)), in(O,C,S). 
+
+/*if the robot is holding an object, then it is possible to put the object away*/
 poss(putAway(O,C),S):- holding(O,S).
-poss(addSoap(P,W),S) :- holding(soap(P),S), \+(hasSoap(washer(W),S)).
-poss(addSoftener(T,W),S) :- holding(softener(T),S).
+
+/*if the robot is holding soap, and the washer does not have soap, then it is possible to addSoap */
+poss(addSoap(P,W),S) :- holding(soap(P),S), not(hasSoap(washer(W),S)).
+
+/*if the robot is holding softener, and the washing machine does not have softener, then it is possible to addSoftener to the washing machine */
+poss(addSoftener(T,W),S) :- holding(softener(T),S), not(hasSoftener(washer(W),S).
+
+/*if the dryer currently has lint, then removeLint is possible */
+poss(removeLint(D),S) :- hasLint(dryer(D),S).
+
+/*wash clothes is possible if c is in w, c is not clean, and w has soap and softener */
+poss(washClothes(C,W),S) :- in(clothes(C),washer(W),S), not(clean(C,S)), hasSoap(W,S), hasSoftener(W,S).
+
+/* dryClothes is possible if is in d, is not dry, and d does not have lint*/
+poss(dryClothes(C,D),S) :-
+
+
+/* fold is possible if c is not folded, clothes are clean and dry, and you are not currently holding anything.*/
+
+/* wear is possible if c is folded */
+
+/* move is possible if you are not holding anything, c is in f, and both f and t are containers. The container can be a dresser, or a hamper, or a washer, or a dryer that is empty  */
+
+
+/
 
 %poss(removeLint(D),S)
 %poss(washClothes(C,W),S)
