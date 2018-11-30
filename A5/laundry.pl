@@ -72,7 +72,8 @@ mentions these variables.
 % write your precondition rules here: you have to provide brief comments %
 
 /*if the robot isn't holding anything, and the object it is looking for is in the cupboard, then it is possible to fetch.*/
-poss(fetch(O,C),S):- not(holding(X,S)), in(O,C,S). 
+poss(fetch(O,C),S):- not(holding(_,S)), in(soap(O),cupboard(C),S). 
+poss(fetch(O,C),S):- not(holding(_,S)), in(softener(O),cupboard(C),S). 
 
 /*if the robot is holding an object, then it is possible to put the object away*/
 poss(putAway(O,C),S):- holding(O,S).
@@ -124,40 +125,20 @@ to make them a bit more efficient.
 % write your successor state rules here: you have to write brief comments %
 
 /*object o is in c in situation s */
-X(O) :-
+in(O,X,[A=move(O,X,C)|S]).
+in(O,X,[A|S]) :- not(fetch(O,_),in(O,X,S).
 
 /*You are holding object O in situation S */
-X(O) :-
+holding(O,[A|S]):- A=fetch(O),S.
+holding(O,[A|S]):- not(A=putAway(O,_)), not(A=addSoap(O,_)),not(A=addSoftener(O,_)),holding(O,S). 
 
 /*Washer W has soap in situation S */
-X(O) :-
+hasSoap((W),[addSoap(soap(P),W)|S]).
+hasSoap(W,[A|S]) :- not(washClothes(_,W)),hasSoap(W,S).  
 
 /*washer W has fabric softener in situation S */
-X(O) :-
-
-/*dryer D has lint in situation S */
-X(O) :-
-
-/*clothes C are clean in situation S */
-X(O) :-
-
-/*X */
-X(O) :-
-
-/*X */
-X(O) :-
-
-%in(O,C,[A|S]) :- not(A=fetch(O,C)),in(O
-holding(O,[A|S]) :- A = fetch(O,C), in(O,C,S).
-%holding(O,[A|S]) :- not(A=putAway(_,_)), 
-%holding(O,[A|S]) :- holding(S).
-%holding(O,[A|S]) :- not(A=addSoftener(O,W)), not(A=addSoap(O,W)), not(A=putAway(O,C)).
-%hasSoap(W,[addSoap(P,W)|S]).
-
-%putAway() :- 
-
-%hasSoftener(softener(W),[addSoftener(T,W)|S]).
-%hasSoftener(softener(W),[A|S]) :- not(A = washClothes(clothes(C),W)), %hasSoftener(W,S).
+hasSoftener(W,[A=addSoftener(T,W)|S]).
+hasSoftener(W,[A|S]) :- not(A=(washClothes(_,W)), hasSoftener(W,S)
 
 
 	/* ---------- Heuristics To Cut Search ------------- */
