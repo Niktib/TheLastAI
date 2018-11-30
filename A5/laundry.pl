@@ -89,26 +89,17 @@ poss(removeLint(D),S) :- hasLint(dryer(D),S).
 /*wash clothes is possible if c is in w, c is not clean, and w has soap and softener */
 poss(washClothes(C,W),S) :- in(clothes(C),washer(W),S), not(clean(C,S)), hasSoap(W,S), hasSoftener(W,S).
 
-/* dryClothes is possible if is in d, is not dry, and d does not have lint*/
-poss(dryClothes(C,D),S) :-
-
+/* dryClothes is possible if C is in D, C is not dry, and D does not have lint*/
+poss(dryClothes(C,D),S) :- in(clothes(C),dryer(D),S), not(dry(C,S)), not(hasLint(D,S)).
 
 /* fold is possible if c is not folded, clothes are clean and dry, and you are not currently holding anything.*/
+poss(fold(C),S) :- dry(clothes(C),S), clean(C,S), not(folded(C)), not(holding(_,S)).
 
 /* wear is possible if c is folded */
+poss(wear(C),S) :- folded(clothes(C)).
 
 /* move is possible if you are not holding anything, c is in f, and both f and t are containers. The container can be a dresser, or a hamper, or a washer, or a dryer that is empty  */
-
-
-/
-
-%poss(removeLint(D),S)
-%poss(washClothes(C,W),S)
-%poss(dryClothes(C,D),S)
-%poss(fold(C),S)
-%poss(wear(C),S)
-%poss(removeLint(d),S)
-
+poss(move(C,F,T),S) :-  not(holding(_),S), in(clothes(C),countainer(F),S), container(T).
 
 container(dresser).
 container(X) :- washer(X).
@@ -131,6 +122,31 @@ with negation of a predicate, e.g., with negation of equality. This can help
 to make them a bit more efficient.
 */
 % write your successor state rules here: you have to write brief comments %
+
+/*object o is in c in situation s */
+X(O) :-
+
+/*You are holding object O in situation S */
+X(O) :-
+
+/*Washer W has soap in situation S */
+X(O) :-
+
+/*washer W has fabric softener in situation S */
+X(O) :-
+
+/*dryer D has lint in situation S */
+X(O) :-
+
+/*clothes C are clean in situation S */
+X(O) :-
+
+/*X */
+X(O) :-
+
+/*X */
+X(O) :-
+
 %in(O,C,[A|S]) :- not(A=fetch(O,C)),in(O
 holding(O,[A|S]) :- A = fetch(O,C), in(O,C,S).
 %holding(O,[A|S]) :- not(A=putAway(_,_)), 
